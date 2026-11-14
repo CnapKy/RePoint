@@ -1,0 +1,8 @@
+flowchart TB
+  Browser[Браузър: Razor Views / HTML / CSS / JS] --> MVC[ASP.NET Core MVC Controllers]
+  MVC --> Service[Бизнес услуги: заявки, пунктове, правила]
+  Service --> EF[EF Core DbContext / Репозитории]
+  MVC --> EF
+  EF --> SQL[(MS SQL Server: RePointDb)]
+  MVC --> Identity[ASP.NET Core Identity / Roles / Cookies]
+  Identity --> EF

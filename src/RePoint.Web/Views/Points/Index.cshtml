@@ -1,0 +1,18 @@
+@model PointSearchViewModel
+@{ ViewData["Title"] = "Пунктове"; }
+<h1>Пунктове за предаване</h1>
+<p class="muted">Всички пунктове в началната база са демонстрационни и не представляват реални локации.</p>
+<form method="get" class="filter" asp-controller="Points" asp-action="Index">
+    <label>Град<input name="city" value="@Model.City" placeholder="Например София" /></label>
+    <label>Материал<select name="materialId"><option value="">Всички</option>
+        @foreach (var item in Model.Materials) { if (item.Id == Model.MaterialId) { <option value="@item.Id" selected>@item.Name</option> } else { <option value="@item.Id">@item.Name</option> } }
+    </select></label>
+    <button class="btn" type="submit">Търси</button>
+</form>
+<div class="cards">
+@foreach (var point in Model.Points)
+{
+ <article class="card"><h2>@point.Name</h2><p>@point.City</p><p>@point.OpeningHours</p><a asp-action="Details" asp-route-id="@point.Id">Подробности</a></article>
+}
+</div>
+@if (!Model.Points.Any()) { <p>Няма намерени пунктове по тези критерии.</p> }

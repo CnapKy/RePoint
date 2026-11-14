@@ -1,0 +1,14 @@
+@model HomeViewModel
+@{ ViewData["Title"] = "Начало"; }
+<section class="hero">
+    <div class="eyebrow">Платформа за разделно събиране</div>
+    <h1>По-лесно предаване. <span>По-чиста среда.</span></h1>
+    <p>Намери подходящ пункт за отпадъците си и подай заявка за предаване. RePoint е дипломна разработка в начален етап.</p>
+    <div class="actions"><a class="btn" asp-controller="Points" asp-action="Index">Намери пункт</a><a class="btn btn-outline" asp-controller="Requests" asp-action="Create">Нова заявка</a></div>
+</section>
+<section class="stats" aria-label="Демонстрационни данни">
+    <div><strong>@Model.ActivePoints</strong><span>демо пункта</span></div>
+    <div><strong>@Model.MaterialTypes</strong><span>вида материали</span></div>
+    <div><strong>@Model.Campaigns</strong><span>кампании</span></div>
+</section>
+<section><h2>Как работи RePoint?</h2><div class="cards"><article class="card"><h3>1. Избери материал</h3><p>Разгледай видовете отпадъци, които могат да се предават разделно.</p></article><article class="card"><h3>2. Намери пункт</h3><p>Филтрирай по град и приеман материал.</p></article><article class="card"><h3>3. Подай заявка</h3><p>Регистрирай приблизително количество. Потвърждаването от оператор е следващ етап.</p></article></div></section>

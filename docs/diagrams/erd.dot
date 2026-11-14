@@ -1,0 +1,24 @@
+digraph ER {
+ graph [bgcolor="white", rankdir=LR, nodesep=0.50, ranksep=0.90, margin=0.1, fontname="DejaVu Sans", size="11,7!"];
+ node [shape=record, style="filled", fillcolor="#F3FAF4", color="#70A88A", fontname="DejaVu Sans", fontsize=11];
+ edge [color="#6D9A84", arrowsize=0.65];
+ usr [label="{ApplicationUser|Id PK\lEmail\l}"];
+ point [label="{CollectionPoint|Id PK\lName, City\lAddress, OpeningHours\l}"];
+ material [label="{Material|Id PK\lCode UNIQUE\lName\l}"];
+ pm [label="{PointMaterial|PointId PK/FK\lMaterialId PK/FK\lIsAccepted\l}"];
+ request [label="{HandoverRequest|Id PK\lUserId FK\lPointId FK\lMaterialId FK\lEstimatedKg, Status\l}"];
+ delivery [label="{ConfirmedDelivery|Id PK\lRequestId UNIQUE FK\lOperatorId FK\lActualKg\l}"];
+ campaign [label="{Campaign|Id PK\lPointId FK nullable\lTitle, Dates\l}"];
+ issue [label="{IssueReport|Id PK\lPointId FK\lStatus\l}"];
+ notif [label="{Notification|Id PK\lUserId FK\lMessage, IsRead\l}"];
+ usr -> request [label="1:N"];
+ usr -> delivery [label="оператор"];
+ usr -> notif [label="1:N"];
+ point -> pm [label="1:N"];
+ material -> pm [label="1:N"];
+ point -> request [label="1:N"];
+ material -> request [label="1:N"];
+ request -> delivery [label="1:0..1",penwidth=2.4,color="#137A55"];
+ point -> campaign [label="1:N"];
+ point -> issue [label="1:N"];
+}

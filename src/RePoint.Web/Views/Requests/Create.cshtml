@@ -1,0 +1,11 @@
+@model HandoverCreateViewModel
+@{ ViewData["Title"] = "Нова заявка"; }
+<h1>Нова заявка за предаване</h1>
+<p class="muted">На този етап подаването на заявка не означава потвърдено предаване.</p>
+<form method="post" asp-action="Create" class="form-card">
+    <div asp-validation-summary="ModelOnly" class="validation"></div>
+    <label asp-for="CollectionPointId">Пункт</label><select asp-for="CollectionPointId" asp-items="ViewBag.Points"><option value="0">Избери пункт</option></select><span asp-validation-for="CollectionPointId" class="validation"></span>
+    <label asp-for="MaterialId">Материал</label><select asp-for="MaterialId" asp-items="ViewBag.Materials"><option value="0">Избери материал</option></select><span asp-validation-for="MaterialId" class="validation"></span>
+    <label asp-for="EstimatedKg">Приблизително количество в кг</label><input asp-for="EstimatedKg" type="number" step="0.001" min="0.001" max="500" /><span asp-validation-for="EstimatedKg" class="validation"></span>
+    <button class="btn" type="submit">Изпрати заявка</button>
+</form>

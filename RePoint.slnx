@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/RePoint.Web/RePoint.Web.csproj" />
+  <Project Path="tests/RePoint.Tests/RePoint.Tests.csproj" />
+</Solution>

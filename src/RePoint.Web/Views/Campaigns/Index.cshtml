@@ -1,0 +1,5 @@
+@model CampaignListViewModel
+@{ ViewData["Title"] = "Кампании"; }
+<h1>Кампании</h1>
+@if (!Model.Campaigns.Any()) { <p>Все още няма публикувани кампании.</p> }
+@foreach (var c in Model.Campaigns) {<article class="card"><h2>@c.Title</h2><p>@c.Description</p><p>@c.StartsAtUtc.ToString("dd.MM.yyyy") – @c.EndsAtUtc.ToString("dd.MM.yyyy")</p></article>}
