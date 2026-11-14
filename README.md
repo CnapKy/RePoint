@@ -2,10 +2,6 @@
 
 **Тема на дипломната работа** — „Платформа за координация на разделно събиране и предаване на отпадъци“
 
-**Автор** — Християн Емилов Беков, XII А клас, ЧПГДН „СофтУни Будител“, София
-
-**Консултант** — Николай Палашев
-
 **Първа контролна проверка** — 16.11.2026 г.
 
 **Окончателно предаване** — 19.04.2027 г.
@@ -83,6 +79,6 @@ dotnet run --project src/RePoint.Web -c Release --no-build --no-launch-profile -
 dotnet test RePoint.slnx -c Release --no-build --logger trx --collect:"XPlat Code Coverage" --results-directory TestResults
 ```
 
-Workflow файлът конфигурира restore, Release build и unit тестове и качване на TRX и Cobertura като артефакт. Първото изпълнение в GitHub предстои. [Отчетът за Етап 1](E1_VERIFICATION.md) съдържа действителните локални резултати и текущото покритие. [Матрицата на изискванията](docs/requirements-traceability.md) свързва заданието с проверките и оставащата работа.
+Workflow файлът конфигурира restore, Release build и unit тестове и качване на TRX и Cobertura като артефакт. Първото изпълнение в GitHub завърши успешно, включително качването на артефакта. [GitHub Actions #1](https://github.com/CnapKy/RePoint/actions/runs/43531679673). [Отчетът за Етап 1](E1_VERIFICATION.md) съдържа действителните локални резултати и текущото покритие. [Матрицата на изискванията](docs/requirements-traceability.md) свързва заданието с проверките и оставащата работа.
 
 Публичното хранилище е [CnapKy/RePoint](https://github.com/CnapKy/RePoint). За предаване виж [информацията за Етап 1](docs/predavane-etap1.md).

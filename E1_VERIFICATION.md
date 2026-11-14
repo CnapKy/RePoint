@@ -27,7 +27,7 @@
 | `dotnet ef migrations has-pending-model-changes` | Няма промени спрямо последната миграция |
 | `sqlcmd -S '(localdb)\MSSQLLocalDB' -E -b -d RePointDb -i 'db\verification.sql' -f 65001` | Прочетена физическата схема и проверени началните данни |
 | `dotnet dev-certs https --check --trust`, `dotnet run --project src/RePoint.Web -c Release --no-build --no-launch-profile --urls https://localhost:7246` | Доверен сертификат и стартирал Kestrel по HTTPS |
-| `actionlint -no-color .github/workflows/ci.yml` | Успешно с actionlint 1.7.12. GitHub runner остава за проверка след публикуване |
+| `actionlint -no-color .github/workflows/ci.yml` | Успешно с actionlint 1.7.12. GitHub runner е проверен при финалния преглед |
 | `git diff --cached --check`, `git push --dry-run origin HEAD:refs/heads/etap-1-verification` | Подготвените файлове преминаха проверката. Dry run потвърди достъп до отдалеченото хранилище. LICENSE съвпада с версията в `origin/main` |
 
 EF командите са изпълнени с `--project src/RePoint.Web --startup-project src/RePoint.Web --configuration Release --no-build`. При генерирането е зададен и `--output-dir Data/Migrations`. Празната LocalDB база `RePointDb` е създадена с файлове на `D:`, а EF Core е създал таблиците и началните записи.
@@ -74,9 +74,17 @@ Coverlet измери **2/11 изпълними реда в `Services/` (18,18%)
 - Обновени са Identity и EF Core пакетите до 10.0.15. Предупрежденията NU1902 и NU1903 за транзитивния `System.Security.Cryptography.Pkcs` изчезнаха. [Указания на Microsoft](https://github.com/advisories/GHSA-846f-f764-76mx)
 - Добавени са SQL ограничения, Identity роли и начална миграция. Docker портът е ограничен до localhost. CI е обновен да събира TRX и Cobertura.
 
+## Финална повторна проверка
+
+На 14.11.2026 г. повторно преминаха възстановяването на пакети, Release build с 0 грешки и 0 предупреждения и всички 12 unit теста. EF Core потвърди, че базата е актуална и моделът съвпада с миграцията. SQL проверката отново потвърди 16 таблици, ключовете, ограниченията и началните записи.
+
+Клонът etap-1-verification е публикуван. CI на 4d508e4 премина успешно на GitHub runner, включително restore, build, unit тестове с покритие и качване на артефакта repoint-test-results. [GitHub Actions #1](https://github.com/CnapKy/RePoint/actions/runs/43531679673)
+
+От текущите публични Markdown файлове са премахнати имената, класът и училището. Лицензът запазва оригиналното авторско означение, а предишните Git ревизии остават в историята. Документацията за споделяне, снимките на заданието, тестовите артефакти и локалните настройки остават извън Git.
+
 ## Оставащи действия
 
-- Публикуване на прегледан клон, проверка на действителен GitHub Actions run, споделяне на DOCX и потвърждаване на достъпа на консултанта. Работният DOCX описва състоянието преди локалната проверка и следва да се сверява с този отчет.
+- Преглед на Pull Request, споделяне на DOCX и потвърждаване на достъпа на консултанта. Работният DOCX описва състоянието преди локалната проверка и следва да се сверява с този отчет.
 - За незадължителния Docker вариант освободи дисково място, стартирай `wsl --install` в администраторски PowerShell, рестартирай, инсталирай и стартирай Docker Desktop с WSL 2 и провери `docker version` и `docker compose version`. [WSL](https://learn.microsoft.com/en-us/windows/wsl/install), [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)
 - Преди публично хостване обнови .NET 10 runtime до актуалната корекция и завърши потвърждаването на имейл, ролите и правата. Операторско потвърждение, отчети, карта, филтър по работно време, управление, сигнали, известия, публичен URL и демо акаунти остават за следващи етапи. [Актуален .NET 10](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 - Предстоят интеграционни тестове за завършените процеси, проверки за SQL Injection и XSS, по-широко тестване на устройства и браузъри и измерване на покритието спрямо финалния праг. Подробности има в [матрицата](docs/requirements-traceability.md).
