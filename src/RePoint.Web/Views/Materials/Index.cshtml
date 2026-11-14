@@ -1,0 +1,3 @@
+@model IReadOnlyList<Material>
+@{ ViewData["Title"] = "Материали"; }
+<h1>Материали</h1><div class="cards">@foreach (var item in Model) {<article class="card"><h2>@item.Name</h2><p>@item.Description</p></article>}</div>

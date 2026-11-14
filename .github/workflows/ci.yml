@@ -1,0 +1,32 @@
+name: RePoint CI
+on:
+  push:
+    branches: [main, etap-1-verification]
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Restore
+        run: dotnet restore RePoint.slnx
+      - name: Build
+        run: dotnet build RePoint.slnx -c Release --no-restore
+      - name: Unit tests and coverage
+        run: dotnet test RePoint.slnx -c Release --no-build --logger trx --collect:"XPlat Code Coverage" --results-directory TestResults
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: repoint-test-results
+          path: TestResults/
+          if-no-files-found: warn

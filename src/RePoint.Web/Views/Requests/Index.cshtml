@@ -1,0 +1,5 @@
+@model MyRequestsViewModel
+@{ ViewData["Title"] = "Моите заявки"; }
+<h1>Моите заявки</h1><p><a class="btn" asp-action="Create">Нова заявка</a></p>
+@if (!Model.Requests.Any()) { <p>Все още нямаш създадени заявки.</p> }
+@foreach (var request in Model.Requests) {<article class="card"><h2>Заявка №@request.Id</h2><p>@request.Material.Name · @request.CollectionPoint.Name</p><p>Очаквано: @request.EstimatedKg кг · Състояние: @request.Status</p></article>}

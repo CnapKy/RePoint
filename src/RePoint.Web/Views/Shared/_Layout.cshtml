@@ -1,0 +1,40 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="RePoint – учебна платформа за координация на разделно събиране на отпадъци." />
+    <title>@ViewData["Title"] · RePoint</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="container nav" aria-label="Основна навигация">
+            <a class="brand" asp-area="" asp-controller="Home" asp-action="Index"><span class="logo-mark">♻</span> RePoint</a>
+            <a asp-area="" asp-controller="Points" asp-action="Index">Пунктове</a>
+            <a asp-area="" asp-controller="Materials" asp-action="Index">Материали</a>
+            <a asp-area="" asp-controller="Campaigns" asp-action="Index">Кампании</a>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a asp-area="" asp-controller="Requests" asp-action="Index">Моите заявки</a>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+                    <button type="submit" class="nav-button">Изход</button>
+                </form>
+            }
+            else
+            {
+                <a asp-area="Identity" asp-page="/Account/Login">Вход</a>
+                <a asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+            }
+        </nav>
+    </header>
+    <main class="container content" id="main-content">
+        @if (TempData["Notice"] is string msg) { <p role="status" class="notice">@msg</p> }
+        @RenderBody()
+    </main>
+    <footer class="footer container">© RePoint · Учебен проект · Данните за демо пунктове не са реални</footer>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

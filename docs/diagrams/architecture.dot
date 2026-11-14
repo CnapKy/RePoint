@@ -1,0 +1,12 @@
+digraph Architecture {
+ graph [bgcolor="white", fontname="DejaVu Sans", rankdir=TB, nodesep=0.46, ranksep=0.48, margin=0.14];
+ node [shape=box, style="rounded,filled", fillcolor="#EDF8F1", color="#6FAD90", fontname="DejaVu Sans", fontsize=11, margin="0.20,0.14"];
+ edge [color="#589B7D", penwidth=1.8, arrowsize=0.7];
+ ui [label="Потребителски интерфейс\nRazor / HTML / CSS"];
+ mvc [label="ASP.NET Core MVC\nКонтролери + ViewModels"];
+ services [label="Бизнес логика\nServices / Policies"];
+ identity [label="Identity и роли\nCookie authentication"];
+ ef [label="Достъп до данни\nEF Core Code First"];
+ db [label="MS SQL Server\nRePointDb", shape=cylinder, fillcolor="#DCEDE5"];
+ ui -> mvc; mvc -> services; mvc -> identity; services -> ef; identity -> ef; ef -> db;
+}
